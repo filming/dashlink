@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %} - DashLink</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('main.index') }}">DashLink</a>
+        <a href="#">Login</a>
+        <a href="#">Logout</a>
+        <a href="#">Sign Up</a>
+    </nav>
+    <hr>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>
