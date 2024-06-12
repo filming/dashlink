@@ -10,6 +10,7 @@ def create_app(config_class=Config):
     
 
     # registering blueprints
-
+    from src.main import bp as main_bp
+    app.register_blueprint(main_bp)
 
     return app
