@@ -7,9 +7,9 @@
 <body>
     <nav>
         <a href="{{ url_for('main.index') }}">DashLink</a>
-        <a href="#">Login</a>
-        <a href="#">Logout</a>
-        <a href="#">Sign Up</a>
+        <a href="{{ url_for('auth.login') }}">Login</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+        <a href="{{ url_for('auth.sign_up') }}">Sign Up</a>
     </nav>
     <hr>
     <div class="content">
