@@ -11,4 +11,4 @@ def logout():
 
 @bp.route("/sign-up")
 def sign_up():
-    return "<h1>Sign Up</h1>"
+    return render_template("auth/sign_up.html")
