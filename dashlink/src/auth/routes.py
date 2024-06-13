@@ -7,3 +7,7 @@ def login():
 @bp.route("/logout")
 def logout():
     return "<h1>Logout</h1>"
+
+@bp.route("/sign-up")
+def sign_up():
+    return "<h1>Sign Up</h1>"
