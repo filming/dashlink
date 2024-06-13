@@ -1,8 +1,9 @@
+from flask import render_template
 from src.auth import bp
 
 @bp.route("/login")
 def login():
-    return "<h1>Login</h1>"
+    return render_template("auth/login.html")
 
 @bp.route("/logout")
 def logout():
