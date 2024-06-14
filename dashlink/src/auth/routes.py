@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, redirect, url_for
 
 from src.auth import bp
 from src.auth.forms import SignupForm
@@ -16,6 +16,7 @@ def sign_up():
     form = SignupForm()
 
     if form.validate_on_submit():
-        pass
+
+        return redirect(url_for('auth.sign_up'))
 
     return render_template("auth/sign_up.html", form=form)
