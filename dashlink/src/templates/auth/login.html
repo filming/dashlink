@@ -4,4 +4,16 @@
 
 {% block content %}
     <h1>Login - DashLink</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        {{ form.email_or_username.label }}
+        {{ form.email_or_username() }}
+        <br>
+        {{ form.password.label }}
+        {{ form.password() }}
+        <br>
+        {{ form.submit() }}
+    </form>
 {% endblock %}
