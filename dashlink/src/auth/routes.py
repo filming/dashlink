@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for
 from src.auth import bp
 from src.auth.forms import SignupForm, LoginForm
 
-@bp.route("/login")
+@bp.route("/login", methods = ["GET", "POST"])
 def login():
     form = LoginForm()
 
