@@ -1,10 +1,16 @@
 from flask import render_template, redirect, url_for
 
 from src.auth import bp
-from src.auth.forms import SignupForm
+from src.auth.forms import SignupForm, LoginForm
 
 @bp.route("/login")
 def login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+
+        return redirect(url_for('auth.login'))
+
     return render_template("auth/login.html")
 
 @bp.route("/logout")
