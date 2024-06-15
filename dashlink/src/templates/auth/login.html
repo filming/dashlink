@@ -8,10 +8,12 @@
     <form method="POST">
         {{ form.hidden_tag() }}
 
-        {{ form.email_or_username.label }}
-        {{ form.email_or_username() }}
+        {{ form.username.label }}
+        <br>
+        {{ form.username() }}
         <br>
         {{ form.password.label }}
+        <br>
         {{ form.password() }}
         <br>
         {{ form.submit() }}
