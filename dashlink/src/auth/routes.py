@@ -1,5 +1,7 @@
 from flask import render_template, redirect, url_for
 
+from werkzeug.security import generate_password_hash, check_password_hash
+
 from src.auth import bp
 from src.auth.forms import SignupForm, LoginForm
 
