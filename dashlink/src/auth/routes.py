@@ -30,7 +30,15 @@ def sign_up():
     form = SignupForm()
 
     if form.validate_on_submit():
+        new_user = User(
+            username = form.username.data,
+            email = form.email.data,
+            password = generate_password_hash(form.password.data)
+        )
+        
+        db.session.add(new_user)
+        db.session.commit()
 
-        return redirect(url_for('auth.sign_up'))
+        return redirect(url_for('main.index'))
 
     return render_template("auth/sign_up.html", form=form)
