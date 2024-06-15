@@ -17,8 +17,8 @@ def unique_username(form, field):
         raise ValidationError("Username is taken.")
 
 class SignupForm(FlaskForm):
-    email = EmailField("Email", validators=[DataRequired()])
-    username = StringField("Username", validators=[DataRequired(), Length(min=3, max=16)])
+    email = EmailField("Email", validators=[DataRequired(), unique_email])
+    username = StringField("Username", validators=[DataRequired(), Length(min=3, max=16), unique_username])
     password = PasswordField("Password", validators=[DataRequired()])
     password2 = PasswordField("Password (Confirm)", validators=[DataRequired(), EqualTo("password")])
     submit = SubmitField("Sign Up")
