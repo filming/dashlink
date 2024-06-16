@@ -12,7 +12,7 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        user = User.query.filter_by(username = form.username.data).first()
+        user = User.query.filter(User.username.ilike(form.username.data)).first()
 
         if user:
             if check_password_hash(user.password, form.password.data):
