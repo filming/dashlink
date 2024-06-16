@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, flash
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -14,8 +14,14 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username = form.username.data).first()
 
-        if user and check_password_hash(user.password, form.password.data):
-            return redirect(url_for('main.index'))
+        if user:
+            if check_password_hash(user.password, form.password.data):
+                flash("Logged in successfully!", category="success")
+                return redirect(url_for('main.index'))
+            else:
+                flash("Incorrect password!", category="error")
+        else:
+            flash("User does not exist!", category="error")
 
         return redirect(url_for('auth.login'))
 
