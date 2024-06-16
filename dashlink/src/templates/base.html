@@ -12,6 +12,27 @@
         <a href="{{ url_for('auth.sign_up') }}">Sign Up</a>
     </nav>
     <hr>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        {% if category == "success" %}
+        <div>
+            <p style="color: green;">{{ message }}</p>
+            <button type="button" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% else %}
+            <p style="color: red;">{{ message }}</p>
+            <button type="button" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
     <div class="content">
         {% block content %} {% endblock %}
     </div>
