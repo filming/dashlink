@@ -24,6 +24,10 @@ def login():
             flash("User does not exist!", category="error")
 
         return redirect(url_for('auth.login'))
+    
+    else:
+        for curr_error in form.errors:
+            flash(form.errors[curr_error][0], category="error")
 
     return render_template("auth/login.html", form=form)
 
@@ -45,6 +49,12 @@ def sign_up():
         db.session.add(new_user)
         db.session.commit()
 
+        flash("Account created successfully!", category="success")
+
         return redirect(url_for('main.index'))
+    
+    else:
+        for curr_error in form.errors:
+            flash(form.errors[curr_error][0], category="error")
 
     return render_template("auth/sign_up.html", form=form)
