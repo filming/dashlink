@@ -5,13 +5,13 @@ from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
 from src.models.user import User
 
 def unique_email(form, field):
-    user = User.query.filter_by(email = field.data).first()
+    user = User.query.filter(User.email.ilike(field.data)).first()
 
     if user:
         raise ValidationError("Email address is already registered.")
     
 def unique_username(form, field):
-    user = User.query.filter_by(username = field.data).first()
+    user = User.query.filter(User.username.ilike(field.data)).first()
 
     if user:
         raise ValidationError("Username is taken.")
