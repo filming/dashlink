@@ -35,8 +35,10 @@ def login():
     return render_template("auth/login.html", form=form)
 
 @bp.route("/logout")
+@login_required
 def logout():
-    return "<h1>Logout</h1>"
+    logout_user()
+    return redirect(url_for("auth.login"))
 
 @bp.route("/sign-up", methods = ["GET", "POST"])
 def sign_up():
