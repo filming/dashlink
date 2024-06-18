@@ -1,4 +1,5 @@
 from flask import render_template, redirect, url_for, flash
+from flask_login import login_user, logout_user, login_required, current_user
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -16,7 +17,9 @@ def login():
 
         if user:
             if check_password_hash(user.password, form.password.data):
+                login_user(user, remember=True)
                 flash("Logged in successfully!", category="success")
+
                 return redirect(url_for('main.index'))
             else:
                 flash("Incorrect password!", category="error")
@@ -48,6 +51,8 @@ def sign_up():
         
         db.session.add(new_user)
         db.session.commit()
+
+        login_user(new_user, remember=True)
 
         flash("Account created successfully!", category="success")
 
