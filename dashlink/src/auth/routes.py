@@ -32,7 +32,7 @@ def login():
         for curr_error in form.errors:
             flash(form.errors[curr_error][0], category="error")
 
-    return render_template("auth/login.html", form=form)
+    return render_template("auth/login.html", form=form, user=current_user)
 
 @bp.route("/logout")
 @login_required
@@ -64,4 +64,4 @@ def sign_up():
         for curr_error in form.errors:
             flash(form.errors[curr_error][0], category="error")
 
-    return render_template("auth/sign_up.html", form=form)
+    return render_template("auth/sign_up.html", form=form, user=current_user)
