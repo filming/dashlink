@@ -10,4 +10,5 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), index = True, unique = True)
     password = db.Column(db.String(64), index = False, unique = False)
     creation_date = db.Column(db.DateTime(), index = True, default = datetime.now())
+    links = db.relationship("Link", backref="creator")
     
