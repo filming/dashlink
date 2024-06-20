@@ -22,6 +22,7 @@ def create_app(config_class=Config):
 
     # setting up database
     from src.models.user import User
+    from src.models.link import Link
 
     create_database(app)
 
