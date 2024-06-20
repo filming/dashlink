@@ -7,6 +7,6 @@ from src.models.link import Link
 @bp.route("/")
 @login_required
 def index():
-    links = Link.query.all()
+    links = current_user.links
 
     return render_template("index.html", user=current_user, links=links)
