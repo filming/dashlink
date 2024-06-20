@@ -2,6 +2,27 @@
 
 {% block content %}
     <div class="content">
-        <h2>DashLink - Home</h2>
+        <h1>DashLink - Home</h1>
+
+        <h2>Active Links</h2>
+        <table>
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>#</th>
+                    <th>Short URL</th>
+                    <th>Original URL</th>
+                    <th>Created At</th>
+                {% for i in links.length %}
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{links[i].short_url}}</td>
+                    <td>{{links[i].original_link}}</td>
+                    <td>{{links[i].created_at}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
