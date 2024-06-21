@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 
 from random import choices
@@ -46,6 +46,12 @@ def index():
         db.session.add(new_link)
         db.session.commit()
 
+        flash("URL was added successfully!", category="success")
+
         return redirect(url_for("main.index"))
+    
+    else:
+        for curr_error in form.errors:
+            flash(form.errors[curr_error][0], category="error")
 
     return render_template("index.html", user=current_user, links=links, form=form)
