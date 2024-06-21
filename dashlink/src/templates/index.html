@@ -1,39 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<div class="content">
-		<h1>Home</h1>
+	<h1>Home</h1>
+	
+	<h2>Your URLs</h2>
+	<table>
+		<thead>
+		</thead>
+		<tbody>
+			<tr>
+				<th>#</th>
+				<th>Short URL</th>
+				<th>Original URL</th>
+				<th>Redirects</th>
+				<th>Created At</th>
+			</tr>
+			{% for i in range(links|length) %}
+			<tr>
+				<td>{{i+1}}</td>
+				<td>{{links[i].short_link}}</td>
+				<td>{{links[i].original_link}}</td>
+				<td>{{links[i].uses}}</td>
+				<td>{{links[i].created_at.strftime('%Y-%m-%d')}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<form method="POST">
+		{{form.hidden_tag()}}
 
-		<h2>Your URLs</h2>
-		<table>
-			<thead>
-			</thead>
-			<tbody>
-				<tr>
-					<th>#</th>
-					<th>Short URL</th>
-					<th>Original URL</th>
-					<th>Redirects</th>
-					<th>Created At</th>
-				</tr>
-				{% for i in range(links|length) %}
-				<tr>
-					<td>{{i+1}}</td>
-					<td>{{links[i].short_link}}</td>
-					<td>{{links[i].original_link}}</td>
-					<td>{{links[i].uses}}</td>
-					<td>{{links[i].created_at.strftime('%Y-%m-%d')}}</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<form method="POST">
-			{{form.hidden_tag()}}
-
-			<h2>{{form.link.label}}</h2>
-			{{form.link()}}
-			<br>
-			{{form.submit()}}
-		</form>
-	</div>
+		<h2>{{form.link.label}}</h2>
+		{{form.link()}}
+		<br>
+		{{form.submit()}}
+	</form>
 {% endblock %}
