@@ -17,7 +17,7 @@ def generate_short_code():
     
     return "".join(short_code)
 
-@bp.route("/")
+@bp.route("/", methods = ["GET", "POST"])
 @login_required
 def index():
     links = current_user.links
@@ -46,4 +46,6 @@ def index():
         db.session.add(new_link)
         db.session.commit()
 
-    return render_template("index.html", user=current_user, links=links)
+        return redirect(url_for("main.index"))
+
+    return render_template("index.html", user=current_user, links=links, form=form)
