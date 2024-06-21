@@ -24,5 +24,13 @@
                 {% endfor %}
             </tbody>
         </table>
+		<form method="POST">
+			{{form.hidden_tag()}}
+
+			<h2>{{form.link.label}}</h2>
+			{{form.link()}}
+			<br>
+			{{form.submit()}}
+		</form>
     </div>
 {% endblock %}
