@@ -21,5 +21,29 @@ def generate_short_code():
 @login_required
 def index():
     links = current_user.links
+    
+    form = AddURL()
+
+    if form.validate_on_submit():
+        link_clean = form.link.data.strip()
+
+        is_valid_short_code = False
+        while not is_valid_short_code:
+            short_code = generate_short_code()
+
+            existing_link = Link.query.filter(Link.short_code == short_code).first()
+
+            if not existing_link:
+                is_valid_short_code = True
+
+        new_link = Link(
+            short_code = short_code,
+            short_link = f"{BASE_URL}/{short_code}",
+            original_link = link_clean,
+            creator_id = current_user.id
+        )
+
+        db.session.add(new_link)
+        db.session.commit()
 
     return render_template("index.html", user=current_user, links=links)
