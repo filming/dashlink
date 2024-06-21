@@ -14,6 +14,7 @@
 				<th>Original URL</th>
 				<th>Redirects</th>
 				<th>Created At</th>
+				<th> </th>
 			</tr>
 			{% for i in range(links|length) %}
 			<tr>
@@ -22,6 +23,11 @@
 				<td>{{links[i].original_link}}</td>
 				<td>{{links[i].uses}}</td>
 				<td>{{links[i].created_at.strftime('%Y-%m-%d')}}</td>
+				<td>
+					<button onClick="deleteLink(' {{links[i].id}} ')">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</td>
 			</tr>
 			{% endfor %}
 		</tbody>
