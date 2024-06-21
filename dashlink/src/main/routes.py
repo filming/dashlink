@@ -1,8 +1,9 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request, jsonify
 from flask_login import login_required, current_user
 
 from random import choices
 from string import ascii_lowercase, digits
+import json
 
 from src.extensions import db
 from src.main import bp
@@ -55,3 +56,18 @@ def index():
             flash(form.errors[curr_error][0], category="error")
 
     return render_template("index.html", user=current_user, links=links, form=form)
+
+@bp.route("/delete-link", methods = ["POST"])
+@login_required
+def delete_link():
+    req = json.loads(request.data)
+    link_id = int(req["linkId"])
+
+    link = Link.query.get(link_id)
+
+    if link:
+        if link.creator_id == current_user.id:
+            db.session.delete(link)
+            db.session.commit()
+
+    return jsonify({})
