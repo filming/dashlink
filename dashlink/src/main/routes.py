@@ -71,3 +71,16 @@ def delete_link():
             db.session.commit()
 
     return jsonify({})
+
+@bp.route("/<path>", methods = ["GET"])
+def handle_redirect(path):
+    # check to see if url path fits short_code format
+    if path.isalnum() and (len(path) == 7):
+        # check to see if a link with path as short code exists in db
+        link = Link.query.filter(Link.short_code.ilike(path)).first()
+
+        if link:
+            return redirect(link.original_link)
+
+    # any issues results in us sending the user back to the home page
+    return redirect(url_for("main.index"))
